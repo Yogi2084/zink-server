@@ -1,5 +1,6 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
+import { cors } from 'hono/cors';
 
 
 type Post = {
@@ -16,6 +17,8 @@ const posts: Post[] = [
 ];
 
 const allRoutes = new Hono()
+allRoutes.use(cors({ origin: 'http://localhost:3000' }))
+
 
 allRoutes.get('/posts', (c) => {
  return c.json(posts, 200)
