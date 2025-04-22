@@ -23,6 +23,15 @@ allRoutes.use(cors({ origin: 'http://localhost:4000' }))
 allRoutes.get('/posts', (c) => {
  return c.json(posts, 200)
 });
+allRoutes.get('/posts/:id', (c) => {
+  const id = c.req.param('id')
+  const post = posts.find((post) => post.id === id)
+  if (!post) {
+    return c.json({ message: 'Post not found' }, 404)
+  }
+  return c.json(post, 200)
+
+})
 
 serve(allRoutes, ({ port }) =>{
   console.log(`\t Running @ http://localhost:${port}`)
