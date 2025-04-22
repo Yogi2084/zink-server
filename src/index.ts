@@ -17,7 +17,7 @@ const posts: Post[] = [
 ];
 
 const allRoutes = new Hono()
-allRoutes.use(cors({ origin: 'http://localhost:3000' }))
+allRoutes.use(cors({ origin: 'http://localhost:4000' }))
 
 
 allRoutes.get('/posts', (c) => {
