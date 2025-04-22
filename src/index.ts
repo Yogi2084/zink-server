@@ -1,12 +1,26 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 
-const app = new Hono()
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
+type Post = {
+  id: string;
+  title: string;
+};
+
+const posts: Post[] = [
+  { id: "1", title: "Getting Started with TypeScript" },
+  { id: "2", title: "Building a Blog with Next.js and MDX" },
+  { id: "3", title: "Understanding React Server Components" },
+  { id: "4", title: "Styling in Tailwind CSS: A Beginner’s Guide" },
+  { id: "5", title: "Top 10 VS Code Extensions for Web Devs" },
+];
+
+const allRoutes = new Hono()
+
+allRoutes.get('/posts', (c) => {
+ return c.json(posts, 200)
+});
+
+serve(allRoutes, ({ port }) =>{
+  console.log(`\t Running @ http://localhost:${port}`)
 })
-
-serve(app)
-  console.log(`Server is running on http://localhost:${3000}`)
-
